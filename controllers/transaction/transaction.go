@@ -48,6 +48,7 @@ func GetPairs(message []byte) {
 		getPairsBySwapExactTokensForTokens(data.Params.Result.Transaction.Input)
 		return
 	}
+	// TODO: 增加其他 swap 函数
 }
 
 // 通过 swapExactTokensForTokens 获取的 pairs
