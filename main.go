@@ -17,14 +17,6 @@ const (
 	subStr = `{"jsonrpc": "2.0", "method": "eth_subscribe","params": ["alchemy_minedTransactions", {"addresses": [{"to": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"}]}],"id": 1}`
 )
 
-type inputData struct {
-	Params struct {
-		Transaction struct {
-			InputData string `json:"input"`
-		} `json:"transaction"`
-	} `json:"params"`
-}
-
 func main() {
 	config.Load("./config.yml")
 	service.Init()
@@ -48,9 +40,6 @@ func main() {
 			go transaction.GetPairs(message)
 		}
 	}()
-
-	ticker := time.NewTicker(time.Minute)
-	defer ticker.Stop()
 
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
