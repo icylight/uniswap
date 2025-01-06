@@ -15,8 +15,9 @@ func init() {
 
 // Config global config
 type Config struct {
-	Redis Redis `yaml:"redis"`
-	Eth   Eth   `yaml:"eth"`
+	Redis      Redis      `yaml:"redis"`
+	Eth        Eth        `yaml:"eth"`
+	UniSwapABI UniSwapABI `yaml:"uniswap_abi"`
 }
 
 // Redis config for redis
@@ -27,6 +28,13 @@ type Redis struct {
 // Eth config
 type Eth struct {
 	URL string `yaml:"url"`
+	WS  string `yaml:"ws"`
+}
+
+// UniSwapABI uniswap abi json files
+type UniSwapABI struct {
+	PairABI   string `yaml:"pair_abi"`
+	RouterABi string `yaml:"router_abi"`
 }
 
 // Load config

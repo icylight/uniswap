@@ -27,3 +27,4 @@ go.work.sum
 demo
 uniswap
 config.yml
+.vscode/settings.json

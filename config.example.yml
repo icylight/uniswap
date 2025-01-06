@@ -1,4 +1,8 @@
 redis:
   addr: 'localhost:6379'
 eth:
-  url: 'wss://eth-mainnet.g.alchemy.com/v2/test'
+  url : 'https://eth-mainnet.g.alchemy.com/v2/test'
+  ws: 'wss://eth-mainnet.g.alchemy.com/v2/test'
+uniswap_abi:
+  router_abi: 'data/uniswap.abi.json' # 使用绝对路径
+  pair_abi: 'data/uniswap_v2_pair.abi.json'

@@ -11,7 +11,7 @@ func TestLoad(t *testing.T) {
 	assert := assert.New(t)
 	require := require.New(t)
 
-	require.NoError(Load("../config.example.yml"))
+	require.NoError(Load("../config.yml"))
 	assert.True(Conf.Eth.URL != "")
 	t.Log(Conf.Eth.URL)
 }
