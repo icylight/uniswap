@@ -48,11 +48,23 @@ func GetPairs(message []byte) {
 		getPairsBySwapExactTokensForTokens(data.Params.Result.Transaction.Input)
 		return
 	}
+	if strings.HasPrefix(data.Params.Result.Transaction.Input, "0x18cbafe5") {
+		getPairBySwapExactTokensForETH(data.Params.Result.Transaction.Input)
+		return
+	}
 	// TODO: 增加其他 swap 函数
 }
 
 // 通过 swapExactTokensForTokens 获取的 pairs
 func getPairsBySwapExactTokensForTokens(input string) {
+	getPairByMethodIndex(input, 2)
+}
+
+func getPairBySwapExactTokensForETH(input string) {
+	getPairByMethodIndex(input, 2)
+}
+
+func getPairByMethodIndex(input string, addressIdx int) {
 	hex := common.Hex2Bytes(input[2:])
 	m, err := service.UniswapRouterABI.MethodById(hex[:4])
 	if err != nil {
@@ -64,7 +76,11 @@ func getPairsBySwapExactTokensForTokens(input string) {
 		log.Println(err)
 		return
 	}
-	tokens, ok := args[2].([]common.Address)
+	if addressIdx > len(args) {
+		log.Printf("addressIdx(%d) > len(args)(%d), method: %s\n", addressIdx, len(args), m.String())
+		return
+	}
+	tokens, ok := args[addressIdx].([]common.Address)
 	if !ok {
 		log.Println("parse tokens failed")
 		return
