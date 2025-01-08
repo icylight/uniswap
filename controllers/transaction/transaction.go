@@ -27,6 +27,11 @@ type inputData struct {
 
 // GetPairs 获取交易对
 func GetPairs(message []byte) {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Println("Recovered from panic:", r)
+		}
+	}()
 	var data inputData
 	err := json.Unmarshal(message, &data)
 	if err != nil {
