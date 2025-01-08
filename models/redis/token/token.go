@@ -21,6 +21,7 @@ type Token struct {
 	Symbol   string `json:"symbol"`
 	Decimals int    `json:"decimals"`
 	Logo     string `json:"logo"`
+	Address  string `json:"address"`
 }
 
 // GetTokenByAddress get token by address
@@ -55,6 +56,7 @@ func GetTokenByAddress(address string) (*Token, error) {
 		log.Println(err)
 		return nil, err
 	}
+	t.Address = address
 
 	ctx, cancel = context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
